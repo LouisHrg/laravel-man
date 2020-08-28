@@ -1,0 +1,36 @@
+version: "3.4"
+
+services:
+  php:
+    container_name: laravel-php
+    build: .docker/php
+    depends_on:
+      - db
+    volumes:
+      - .:/home/laravel:rw
+
+  web:
+    container_name: laravel-web
+    image: nginx:1.15-alpine
+    ports:
+      - 8080:80
+    depends_on:
+      - php
+    volumes:
+      - ./public:/home/laravel/public:rw
+      - ./.docker/nginx:/etc/nginx/conf.d:rw
+
+  db:
+    container_name: laravel-db
+    image: mariadb:10.5.5
+    ports:
+      - 3306:3306
+    volumes:
+      - database:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=laravel
+      - MYSQL_USER=laravel
+      - MYSQL_PASSWORD=laravel
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+volumes:
+  database: {}
