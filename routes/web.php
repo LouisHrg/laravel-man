@@ -13,6 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'IndexController@Index')->name('index');
+
+Auth::routes();
+
+
+Route::middleware('auth')->group(function(){
+
+  Route::get('/home', 'HomeController@index')->name('home');
+
+  // Post routes
+  Route::get('/posts', 'PostController@index')->name('posts.index');
+
+  Route::get('/posts/create', 'PostController@create')->name('posts.create');
+
+  Route::post('/posts/store', 'PostController@store')->name('posts.store');
+
+  Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
+
 });
