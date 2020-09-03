@@ -17,7 +17,16 @@
                         </div>
                     @endif
 
+                    @if(Route::currentRouteName() === 'posts.edit')
+                    {!! Form::model(
+                        $post,
+                        ['route' =>
+                            ['posts.update', 'post' => $post]
+                        ])
+                    !!}
+                    @else
                     {!! Form::open(['route' => 'posts.store']) !!}
+                    @endif
 
                         {!! Form::label('Titre') !!}
                         {!! Form::text('title') !!}
@@ -26,7 +35,7 @@
                         {!! Form::text('content') !!}
 
                         {!! Form::label('Date') !!}
-                        {!! Form::date('published_at') !!}
+                        {!! Form::datetime('published_at') !!}
 
                         {!! Form::submit() !!}
 

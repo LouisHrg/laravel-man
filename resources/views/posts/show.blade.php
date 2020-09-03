@@ -6,6 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ $post->title }}</div>
+                {{ View::make('posts.delete', ['post' => $post]) }}
                 <p>{{ $post->content }}</p>
                 <p>{{ $post->published }}</p>
                 <div class="card-body">
