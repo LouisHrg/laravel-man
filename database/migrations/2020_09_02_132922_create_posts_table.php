@@ -18,6 +18,16 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->longText('content');
             $table->datetime('published_at');
+
+            $table
+            ->bigInteger('category_id')
+            ->unsigned()
+            ->nullable();
+
+            $table->foreign('category_id')
+                  ->references('id')
+                  ->on('categories');
+
             $table->timestamps();
         });
     }

@@ -17,25 +17,19 @@
                         </div>
                     @endif
 
-                    @if(Route::currentRouteName() === 'posts.edit')
+                    @if(Route::currentRouteName() === 'categories.edit')
                     {!! Form::model(
-                        $post,
+                        $category,
                         ['route' =>
-                            ['posts.update', 'post' => $post]
+                            ['categories.update', 'category' => $category]
                         ])
                     !!}
                     @else
-                    {!! Form::open(['route' => 'posts.store']) !!}
+                    {!! Form::open(['route' => 'categories.store']) !!}
                     @endif
 
-                        {!! Form::label('Titre') !!}
-                        {!! Form::text('title') !!}
-
-                        {!! Form::label('Contenu') !!}
-                        {!! Form::text('content') !!}
-
-                        {!! Form::label('Date') !!}
-                        {!! Form::date('published_at') !!}
+                        {!! Form::label('Name') !!}
+                        {!! Form::text('name') !!}
 
                         {!! Form::submit() !!}
 

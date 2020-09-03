@@ -18,7 +18,7 @@ Route::get('/', 'IndexController@Index')->name('index');
 Auth::routes();
 
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function() {
 
   Route::get('/home', 'HomeController@index')->name('home');
 
@@ -39,4 +39,26 @@ Route::middleware('auth')->group(function(){
 
   Route::delete('/posts/{post}/delete', 'PostController@delete')
   ->name('posts.delete');
+
+  Route::get('/categories', 'CategoryController@index')
+  ->name('categories.index');
+
+  Route::get('/categories/create', 'CategoryController@create')
+  ->name('categories.create');
+
+  Route::get('/categories/{category}', 'CategoryController@show')
+  ->name('categories.show');
+
+
+  Route::post('/categories/store', 'CategoryController@store')
+  ->name('categories.store');
+
+  Route::get('/categories/{category}/edit', 'CategoryController@edit')
+  ->name('categories.edit');
+
+  Route::post('/categories/{category}/update', 'CategoryController@update')
+  ->name('categories.update');
+
+  Route::delete('/categories/{category}/delete', 'CategoryController@delete')
+  ->name('categories.delete');
 });
