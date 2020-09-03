@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <p>{{ __('You are logged in!') }}</p>
+                    <a href="{{route('posts.index')}}"> See the posts </p>
+                    <a href="{{route('categories.index')}}"> See the categories </a>
                 </div>
             </div>
         </div>

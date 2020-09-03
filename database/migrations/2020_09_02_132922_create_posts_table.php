@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title');
             $table->longText('content');
-            $table->datetime('published_at');
+            $table->date('published_at');
 
             $table
             ->bigInteger('category_id')
@@ -27,6 +27,15 @@ class CreatePostsTable extends Migration
             $table->foreign('category_id')
                   ->references('id')
                   ->on('categories');
+
+            $table
+            ->bigInteger('user_id')
+            ->unsigned()
+            ->nullable();
+
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users');
 
             $table->timestamps();
         });

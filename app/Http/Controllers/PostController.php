@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
-
+use Auth;
 class PostController extends Controller
 {
     public function index(Request $request)
     {
-        $posts = Post::all();
+        $posts = Post::paginate(3);
 
         return view('posts.index', ['posts' => $posts]);
     }
@@ -30,6 +30,7 @@ class PostController extends Controller
         $post->content = $validated['content'];
         $post->published_at = $validated['published_at'];
         $post->category_id = $validated['category_id'];
+        $post->user_id = Auth::id();
         $post->save();
 
         return redirect()->route('posts.index');
@@ -57,6 +58,7 @@ class PostController extends Controller
         $post->content = $validated['content'];
         $post->published_at = $validated['published_at'];
         $post->category_id = $validated['category_id'];
+        $post->user_id = Auth::id();
         $post->save();
 
         return redirect()->route('posts.show', ['post' => $post]);
@@ -74,6 +76,7 @@ class PostController extends Controller
 
     public function delete(Request $request, Post $post)
     {
-        dd($post);
+        $post->delete();
+        return redirect()->route('posts.index');
     }
 }
