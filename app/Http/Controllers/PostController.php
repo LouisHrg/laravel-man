@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -16,7 +17,8 @@ class PostController extends Controller
 
     public function create(Request $request)
     {
-        return view('posts.form');
+        $options = Category::toSelectArray();
+        return view('posts.form', ['options' => $options]);
     }
 
     public function store(Request $request)
@@ -27,6 +29,7 @@ class PostController extends Controller
         $post->title = $validated['title'];
         $post->content = $validated['content'];
         $post->published_at = $validated['published_at'];
+        $post->category_id = $validated['category_id'];
         $post->save();
 
         return redirect()->route('posts.index');
@@ -39,7 +42,11 @@ class PostController extends Controller
 
     public function edit(Request $request, Post $post)
     {
-        return view('posts.form', ['post' => $post]);
+        $options = Category::toSelectArray();
+        return view(
+            'posts.form',
+            ['post' => $post, 'options' => $options]
+        );
     }
 
     public function update(Request $request, Post $post)
@@ -49,6 +56,7 @@ class PostController extends Controller
         $post->title = $validated['title'];
         $post->content = $validated['content'];
         $post->published_at = $validated['published_at'];
+        $post->category_id = $validated['category_id'];
         $post->save();
 
         return redirect()->route('posts.show', ['post' => $post]);
@@ -58,6 +66,7 @@ class PostController extends Controller
     {
         return $request->validate([
           'title' => 'required',
+          'category_id' => 'exists:App\Category,id',
           'content' => 'min:3',
           'published_at' => 'date',
         ]);

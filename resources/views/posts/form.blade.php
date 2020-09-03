@@ -31,6 +31,11 @@
                         {!! Form::label('Titre') !!}
                         {!! Form::text('title') !!}
 
+                        {!! Form::select(
+                            'category_id',
+                            $options
+                        ) !!}
+
                         {!! Form::label('Contenu') !!}
                         {!! Form::text('content') !!}
 

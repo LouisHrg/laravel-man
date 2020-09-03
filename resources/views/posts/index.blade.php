@@ -11,6 +11,9 @@
                     <li> Title : {{ $post->title }}</li>
                     <li> Content : {{ $post->content }}</li>
                     <li> Date : {{ $post->published_at }}</li>
+                    @if(isset($post->category))
+                    <li> Category : {{ $post->category->name }}</li>
+                    @endif
                 </ul>
                 @empty
                 <p> Il n'y pas de post</p>
