@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use Auth;
+use File;
+use Response;
+
 class PostController extends Controller
 {
     public function index(Request $request)
@@ -31,6 +34,11 @@ class PostController extends Controller
         $post->published_at = $validated['published_at'];
         $post->category_id = $validated['category_id'];
         $post->user_id = Auth::id();
+
+        $post
+        ->addMediaFromRequest('image')
+        ->toMediaCollection('posts');
+
         $post->save();
 
         return redirect()->route('posts.index');
@@ -70,6 +78,7 @@ class PostController extends Controller
           'title' => 'required',
           'category_id' => 'exists:App\Category,id',
           'content' => 'min:3',
+          'image' => 'image',
           'published_at' => 'date',
         ]);
     }
@@ -79,4 +88,5 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('posts.index');
     }
+
 }

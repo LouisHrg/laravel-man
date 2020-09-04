@@ -18,7 +18,8 @@ RUN docker-php-ext-install \
     pdo \
     pdo_mysql \
     mysqli \
-    exif
+    exif \
+    mbstring
 
 # Install extensions from PECL
 RUN pecl install \

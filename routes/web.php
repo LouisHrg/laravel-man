@@ -27,3 +27,22 @@ Route::prefix('/admin')->middleware('auth')->group(function() {
   Route::resource('categories', 'CategoryController');
 
 });
+
+
+Route::get('storage/{filename}', function ($filename)
+{
+    $path = storage_path('app/public/' . $filename);
+
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+})->where('filename', '[A-Za-z0-9\/.\(\)-_]*');
