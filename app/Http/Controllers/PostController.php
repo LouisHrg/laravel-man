@@ -74,7 +74,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function delete(Request $request, Post $post)
+    public function destroy(Request $request, Post $post)
     {
         $post->delete();
         return redirect()->route('posts.index');

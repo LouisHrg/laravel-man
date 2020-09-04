@@ -21,7 +21,7 @@
                     {!! Form::model(
                         $post,
                         ['route' =>
-                            ['posts.update', 'post' => $post]
+                            ['posts.update', 'post' => $post], 'method' => 'put'
                         ])
                     !!}
                     @else

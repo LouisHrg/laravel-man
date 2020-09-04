@@ -1,5 +1,5 @@
 {!! Form::open(['url' =>
-  route('categories.delete', $category),
+  route('categories.destroy', $category),
   'method' => 'delete'
   ]) !!}
 <button class="btn btn-danger" type="submit">

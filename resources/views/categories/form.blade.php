@@ -21,7 +21,7 @@
                     {!! Form::model(
                         $category,
                         ['route' =>
-                            ['categories.update', 'category' => $category]
+                            ['categories.update', 'category' => $category], 'method'=>'put'
                         ])
                     !!}
                     @else
